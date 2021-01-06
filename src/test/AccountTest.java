@@ -1,11 +1,11 @@
 package test;
 
-
 import main.Account;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class AccountTest {
 
@@ -13,24 +13,32 @@ public class AccountTest {
 
     @Before
     public void setUp() {
-        account = new Account(1000);
+        account = new Account(100);
+    }
+
+    @Test
+    public void testAccount() throws Exception {
+        if (account == null){
+            fail("fail");
+        }
     }
 
     @Test
     public void testGetBalance(){
-        assertEquals(1000, account.getBalance());
+        assertEquals(100, account.getBalance());
     }
 
     @Test
     public void testDeposit(){
-        account.deposit(100);
-        assertEquals(1100, account.getBalance());
+        account.deposit(50);
+        assertEquals(150, account.getBalance());
     }
 
     @Test
     public void testWithdraw(){
-        account.withdraw(100);
-        assertEquals(900, account.getBalance());
+        account.withdraw(50);
+        assertEquals(50, account.getBalance());
     }
+
 
 }

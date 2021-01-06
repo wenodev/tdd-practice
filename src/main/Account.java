@@ -2,10 +2,10 @@ package main;
 
 public class Account {
 
-    int balance;
+    private int balance;
 
     public Account(int money) {
-        balance = money;
+        this.balance = money;
     }
 
     public int getBalance() {
