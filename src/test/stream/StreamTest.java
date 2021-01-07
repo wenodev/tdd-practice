@@ -7,7 +7,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,6 +37,23 @@ public class StreamTest {
     }
 
     @Test
+    public void testMakeStream(){
+
+        List < String > fruits = new ArrayList <String> ();
+        fruits.add("Banana");
+        fruits.add("Apple");
+        fruits.add("Mango");
+        fruits.add("Orange");
+
+        fruits.stream().sorted((f1,f2) -> f1.compareTo(f2)).forEach(p -> System.out.print(p + " "));
+
+        List<String> orderedFruits = fruits.stream().sorted((o1,o2) -> o1.compareTo(o2)).collect(Collectors.toList());
+        System.out.println(orderedFruits);
+
+    }
+
+
+    @Test
     public void testStreamForeach(){
         productList.stream().filter(product -> product.getPrice()>=30000f).forEach(product -> System.out.println(product.getName()));
     }
@@ -51,16 +71,10 @@ public class StreamTest {
     }
 
     @Test
-    public void testGetSum(){
-        float max = productList.stream().max((p1,p2) -> p1.getPrice() > p2.getPrice() ? 1 : -1).map(Product::getPrice).get();
-        assertEquals(90000f, max);
+    public void testGetMax(){
+        Product product = productList.stream().max((p1, p2) -> p1.getPrice() > p2.getPrice() ? 1 : -1).get();
+        System.out.println(product.getPrice());
     }
 
-    @Test
-    public void testDouble(){
-        double number1 = 1.123123;
-        double number2 = 1.123123;
-        assertEquals(number1,number2, 0);
-    }
 
 }
